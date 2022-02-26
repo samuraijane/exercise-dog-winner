@@ -10,8 +10,16 @@ const Landing = () => {
     disptach(setInitialState());
   }, []);
 
+  const handleClick = () => {
+    console.log('game start clicked');
+  };
+
   return (
-    <p>Landing</p>
+    <>
+      <h2>Welcome to Dog Winner</h2>
+      <p>The only game on the internet where you can win a dog for each correct answer you give.</p>
+      <button onClick={handleClick}>Start Game</button>
+    </>
   )
 
 };
