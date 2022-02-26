@@ -4,3 +4,27 @@
   margin: 0;
   padding: 0;
 }
+
+body,
+html {
+  height: 100%;
+}
+
+.y-sticky {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+footer {
+  background-color: #777;
+  flex-shrink: 0;
+}
+
+header {
+  background-color: #ddd;
+}
+
+main {
+  flex-grow: 1;
+}
