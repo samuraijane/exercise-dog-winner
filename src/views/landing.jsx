@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import useStateCallback from "../hooks/useStateCallback";
 import Question from "../components/question";
+import Status from "../components/status";
 import Welcome from "../components/welcome";
 import { setInitialState } from "../redux/actions";
 
@@ -42,6 +43,7 @@ const Landing = () => {
   return (
     <>
       {currentQuestionCount < 1 && <Welcome />}
+      {!isGameEnd && currentQuestionCount > 0 && <Status count={currentQuestionCount} />}
       <Routes>
         <Route path={`q${currentQuestionCount}`} element={<Question data={questions[currentQuestionCount - 1]} />} />
       </Routes>
