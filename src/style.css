@@ -18,13 +18,22 @@ html {
 
 footer {
   background-color: #777;
+  color: #bbb;
   flex-shrink: 0;
+  padding: 40px 0;
 }
 
 header {
   background-color: #ddd;
+  padding: 30px 0;
 }
 
 main {
   flex-grow: 1;
+  padding: 30px 0;
+}
+
+.y-wrap {
+  margin: 0 auto;
+  width: 90%;
 }

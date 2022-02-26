@@ -1,6 +1,10 @@
 const Footer = () => {
   return (
-    <footer>Footer</footer>
+    <footer>
+      <div className="y-wrap">
+        <p>Built in 2022</p>
+      </div>
+    </footer>
   )
 };
 
