@@ -12,8 +12,10 @@ const QuestionForm = ({ action, count, data }) => {
 
   return (
     <form onSubmit={e => action(e, answer === fieldValue)}>
-      <label>{question}</label>
-      <input onChange={handleChange} />
+      <div className="question-block">
+        <label>{question}</label>
+        <input onChange={handleChange} />
+      </div>
       <button>Submit</button>
     </form>
   )
