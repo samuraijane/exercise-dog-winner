@@ -11,7 +11,7 @@ const Modal = ({ imageURL }) => {
   return (
     <div className="modal">
       {image && (
-        <div className="modal__image-container">
+        <div className="image-container image-container--modal">
           <img src={image} />
         </div>
       )}

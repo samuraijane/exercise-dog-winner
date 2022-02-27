@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import useStateCallback from "../hooks/useStateCallback";
 import { fetchImage, setInitialState, setWrongImage } from "../redux/actions";
+import GameOver from "../components/gameOver";
 import Modal from "../components/modal";
 import QuestionForm from "../components/questionForm";
 import Status from "../components/status";
@@ -72,8 +73,7 @@ const Landing = () => {
       )}
       {isGameEnd && (
         <>
-          <p>Game Over</p>
-          <button onClick={handleNewGame}>New Game</button>
+        <GameOver action={handleNewGame} images={images} />
         </>
       )}
       {images[currentQuestionCount - 1] && (
