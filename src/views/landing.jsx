@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import useStateCallback from "../hooks/useStateCallback";
 import { fetchImage } from "../redux/actions";
+import Modal from "../components/modal";
 import QuestionForm from "../components/questionForm";
 import Status from "../components/status";
 import Welcome from "../components/welcome";
@@ -11,8 +12,10 @@ import { setInitialState } from "../redux/actions";
 const Landing = () => {
 
   const disptach = useDispatch();
-  const questions = useSelector(state => state.questions);
   const navigateTo = useNavigate();
+
+  const images = useSelector(state => state.images);
+  const questions = useSelector(state => state.questions);
 
   const [currentQuestionCount, setCurrentQuestionCount] = useStateCallback(0);
   const [isGameEnd, setIsGameEnd] = useState(false);
@@ -68,6 +71,9 @@ const Landing = () => {
           <p>Game Over</p>
           <button onClick={handleNewGame}>New Game</button>
         </>
+      )}
+      {images[currentQuestionCount - 1] && (
+        <Modal imageURL={images[currentQuestionCount - 1]} message="some message tbd" />
       )}
     </>
   )
