@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-const AnswerForm = ({ correctAnswer }) => {
+const QuestionForm = ({ action, count, data }) => {
+  const { answer, question } = data;
 
   const [fieldValue, setFieldValue] = useState('');
 
@@ -9,16 +10,13 @@ const AnswerForm = ({ correctAnswer }) => {
     setFieldValue(target);
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    console.log(fieldValue === correctAnswer);
-  };
-
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={e => action(e, answer === fieldValue)}>
+      <label>{question}</label>
       <input onChange={handleChange} />
+      <button>Submit</button>
     </form>
   )
 };
 
-export default AnswerForm;
+export default QuestionForm;

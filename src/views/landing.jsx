@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import useStateCallback from "../hooks/useStateCallback";
-import Question from "../components/question";
+import QuestionForm from "../components/questionForm";
 import Status from "../components/status";
 import Welcome from "../components/welcome";
 import { setInitialState } from "../redux/actions";
@@ -36,6 +36,14 @@ const Landing = () => {
     navigateTo('/q1');
   };
 
+  const handleSubmit = (e, isCorrect) => {
+    e.preventDefault();
+    console.log(isCorrect);
+    setTimeout(() => {
+      setCurrentQuestionCount(prevState => prevState + 1, newState => handleNavigation(newState));
+    }, 2000);
+  };
+
   const handleClick = num => {
     setCurrentQuestionCount(prevState => prevState + 1, newState => handleNavigation(newState));
   };
@@ -45,9 +53,14 @@ const Landing = () => {
       {currentQuestionCount < 1 && <Welcome />}
       {!isGameEnd && currentQuestionCount > 0 && <Status count={currentQuestionCount} />}
       <Routes>
-        <Route path={`q${currentQuestionCount}`} element={<Question data={questions[currentQuestionCount - 1]} />} />
+        <Route
+          element={<QuestionForm action={handleSubmit} data={questions[currentQuestionCount - 1]} />}
+          path={`q${currentQuestionCount}`}
+        />
       </Routes>
-      {!isGameEnd && <button disabled={isGameEnd} onClick={handleClick}>Proceed</button>}
+      {!isGameEnd && currentQuestionCount < 1 && (
+        <button disabled={isGameEnd} onClick={handleClick}>Start Game</button>
+      )}
       {isGameEnd && (
         <>
           <p>Game Over</p>
