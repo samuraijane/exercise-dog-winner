@@ -1,13 +1,14 @@
 const Modal = ({ imageURL, message }) => {
-  console.log(imageURL, message)
   return (
-    <div>
+    <div className="modal">
       {imageURL && (
-        <div className="image-container">
+        <div className="modal__image-container">
           <img src={imageURL} />
         </div>
       )}
-      <p>{message}</p>
+      <div className="modal__message">
+        <p>{message}</p>
+      </div>
     </div>
   )
 };
