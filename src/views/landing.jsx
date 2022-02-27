@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import useStateCallback from "../hooks/useStateCallback";
+import { fetchImage } from "../redux/actions";
 import QuestionForm from "../components/questionForm";
 import Status from "../components/status";
 import Welcome from "../components/welcome";
@@ -39,6 +40,7 @@ const Landing = () => {
   const handleSubmit = (e, isCorrect) => {
     e.preventDefault();
     console.log(isCorrect);
+    disptach(fetchImage());
     setTimeout(() => {
       setCurrentQuestionCount(prevState => prevState + 1, newState => handleNavigation(newState));
     }, 2000);

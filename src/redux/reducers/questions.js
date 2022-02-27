@@ -6,7 +6,7 @@ function questionsReducer(state=initialState, action) {
   if (action.type === SET_INITIAL_STATE) {
     return action.data;
   }
-  return 'Attempt to set question data failed.';
+  return state;
 }
 
 export default questionsReducer;
