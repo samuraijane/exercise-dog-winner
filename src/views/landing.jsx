@@ -2,16 +2,15 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import useStateCallback from "../hooks/useStateCallback";
-import { fetchImage } from "../redux/actions";
+import { fetchImage, setInitialState, setWrongImage } from "../redux/actions";
 import Modal from "../components/modal";
 import QuestionForm from "../components/questionForm";
 import Status from "../components/status";
 import Welcome from "../components/welcome";
-import { setInitialState } from "../redux/actions";
 
 const Landing = () => {
 
-  const disptach = useDispatch();
+  const dispatch = useDispatch();
   const navigateTo = useNavigate();
 
   const images = useSelector(state => state.images);
@@ -19,14 +18,16 @@ const Landing = () => {
 
   const [currentQuestionCount, setCurrentQuestionCount] = useStateCallback(0);
   const [isGameEnd, setIsGameEnd] = useState(false);
+  const [isWrongAnswer, setIsWrongAnswer] = useState(false);
 
   useEffect(() => {
-    disptach(setInitialState());
+    dispatch(setInitialState());
   }, []);
 
   const handleNavigation = nextQuestionNum => {
     if (!isGameEnd && currentQuestionCount < 10) {
       navigateTo(`q${nextQuestionNum}`);
+      setIsWrongAnswer(false);
     }
     if (currentQuestionCount >= 10) {
       setIsGameEnd(true);
@@ -34,7 +35,7 @@ const Landing = () => {
   }
 
   const handleNewGame = () => {
-    disptach(setInitialState());
+    dispatch(setInitialState());
     setIsGameEnd(false);
     setCurrentQuestionCount(1);
     navigateTo('/q1');
@@ -42,8 +43,11 @@ const Landing = () => {
 
   const handleSubmit = (e, isCorrect) => {
     e.preventDefault();
-    console.log(isCorrect);
-    disptach(fetchImage());
+    if (isCorrect) {
+      dispatch(fetchImage());
+    } else {
+      dispatch(setWrongImage());
+    }
     setTimeout(() => {
       setCurrentQuestionCount(prevState => prevState + 1, newState => handleNavigation(newState));
     }, 2000);

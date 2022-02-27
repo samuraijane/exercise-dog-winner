@@ -23,4 +23,11 @@ const fetchSucces = imageURL => {
     type: SET_IMAGE,
     imageURL
   }
+};
+
+export const setWrongImage = () => {
+  return {
+    type: SET_IMAGE,
+    imageURL: 'wrong'
+  }
 }
